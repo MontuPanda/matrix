@@ -1,10 +1,7 @@
-from imp import reload
 import random
 import enum
 
-from numpy import block
-
-
+#Enum for actions
 class Action(enum.Enum):
     block = 1
     shoot = 2
