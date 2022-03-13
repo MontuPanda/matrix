@@ -7,7 +7,7 @@ class Action(enum.Enum):
     shoot = 2
     reload = 3
 
-
+#setup userammo and counts
 userammo = 0
 compammo = 0
 deathcount = 0
