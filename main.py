@@ -1,11 +1,5 @@
 import random
-import enum
 
-#Enum for actions
-class Action(enum.Enum):
-    block = 1
-    shoot = 2
-    reload = 3
 
 #setup userammo and counts
 userammo = 0
@@ -23,37 +17,36 @@ while deathcount == 0:
 
     # comp turn choosing
 
-    userstring = (input("Enter your command:"))
+    user = (input("Enter your command:"))
 
-    user = Action[userstring]
 
-    if user == Action.block:
+    if user == "block":
         userpotency = (input("Enter the potency between 1 to 4:"))
-    if user == Action.shoot:
+    if user == "shoot":
         userpotency = (input("Enter the number of bullets between 1 to 4:"))
-    if user == Action.reload:
+    if user == "reload":
         userpotency = "1"
 
     if userammo == 0 and compammo == 0:
-        comp = Action.reload
+        comp = "reload"
         comppotency = 1
     if userammo > 0 and compammo == 0:
         x = random.randint(1, 3)
         y = random.randint(1, min(userammo, 4))
         if x == 1 or x == 3:
-            comp = Action.block
+            comp = "block"
             compotency = y
         if x == 2:
-            comp = Action.reload
+            comp = "reload"
             compotency = 1
     if userammo == 0 and compammo > 0:
         x = random.randint(1, 3)
         y = random.randint(1, min(compammo, 4))
         if x == 1 or x == 3:
-            comp = Action.shoot
+            comp = "shoot"
             comppotency = y
         if x == 2:
-            comp = Action.reload
+            comp = "reload"
             compotency = 1
     if userammo > 0 and compammo > 0:
         if userammo > compammo:
@@ -61,13 +54,13 @@ while deathcount == 0:
             y = random.randint(1, min(userammo, 4))
             z = random.randint(1, min(compammo, 4))
             if x == 1 or x == 4:
-                comp = Action.block
+                comp = "block"
                 comppotency = y
             elif x == 2:
-                comp = Action.shoot
+                comp = "shoot"
                 comppotency = z
             else:
-                comp = Action.reload
+                comp = "reload"
                 comppotency = 1
 
         if userammo < compammo:
@@ -75,13 +68,13 @@ while deathcount == 0:
             y = random.randint(1, min(userammo, 4))
             z = random.randint(1, min(compammo, 4))
             if x == 1 or x == 4:
-                comp = Action.block
+                comp = "block"
                 comppotency = y
             elif x == 2:
-                comp = Action.shoot
+                comp = "shoot"
                 comppotency = z
             else:
-                comp = Action.reload
+                comp = "reload"
                 comppotency = 1
 
         if userammo == compammo:
@@ -89,17 +82,17 @@ while deathcount == 0:
             y = random.randint(1, min(userammo, 4))
             z = random.randint(1, min(compammo, 4))
             if x == 1 or x == 4:
-                comp = Action.block
+                comp = "block"
                 comppotency = y
             elif x == 2 or x == 5:
-                comp = Action.shoot
+                comp = "shoot"
                 comppotency = z
             else:
-                comp = Action.reload
+                comp = "reload"
                 comppotency = 1
 
     # random text check
-    if user != Action.reload and user != Action.block and user != Action.shoot:
+    if user != "reload" and user != "block" and user != "shoot":
         print("Invalid choice")
         print("You lost through default out\nThe computer won")
         deathcount = deathcount+1
@@ -117,20 +110,20 @@ while deathcount == 0:
         deathcount = deathcount+1
         continue
     else:
-        print("You used", user.name, int(userpotency))
-        print("The computer used", comp.name, comppotency, "\n")
+        print("You used", user, int(userpotency))
+        print("The computer used", comp, comppotency, "\n")
 
     # checks
 
     # too many bullets shot
-    if user == Action.shoot and userammo < int(userpotency):
+    if user == "shoot" and userammo < int(userpotency):
         print("You did not have that many bullets")
         print("You lost through default out\nThe computer won")
         deathcount = deathcount+1
         continue
 
     #shoot and block
-    if (user == Action.shoot and comp == Action.block):
+    if (user == "shoot" and comp == "block"):
         if int(userpotency) == comppotency:
             print("The computer blocked your attack")
             userammo = userammo - int(userpotency)
@@ -139,7 +132,7 @@ while deathcount == 0:
             deathcount = deathcount+1
         continue
 
-    if (user == Action.block and comp == Action.shoot):
+    if (user == "block" and comp == "shoot"):
         if int(userpotency) == (comppotency):
             print("You blocked the computer's attack")
             compammo = int(compammo)-int(comppotency)
@@ -148,20 +141,20 @@ while deathcount == 0:
             deathcount = deathcount+1
         continue
 
-    if user == Action.block and comp == Action.block:
+    if user == "block" and comp == "block":
         print("Both of you used block")
         continue
 
-    if user == Action.shoot and comp == Action.reload:
+    if user == "shoot" and comp == "reload":
         print("The computer got shot\nYou won!")
         deathcount = deathcount+1
         continue
-    if comp == Action.shoot and user == Action.reload:
+    if comp == "shoot" and user == "reload":
         print("You lost\nThe computer won!")
         deathcount = deathcount+1
         continue
 
-    if user == Action.shoot and comp == Action.shoot:
+    if user == "shoot" and comp == "shoot":
         if int(userpotency) > comppotency:
             print("Both of you used shoot")
             deathcount = deathcount+1
@@ -176,19 +169,19 @@ while deathcount == 0:
             compammo = compammo-comppotency
         continue
 
-    if user == Action.reload and comp == Action.reload:
+    if user == "reload" and comp == "reload":
         userammo = userammo+1
         compammo = compammo+1
         continue
-    if user == Action.reload:
+    if user == "reload":
         userammo = userammo+1
         continue
-    if comp == Action.reload:
+    if comp == "reload":
         compammo = compammo+1
         continue
-    if user == Action.block and comp == Action.reload:
+    if user == "block" and comp == "reload":
         compammo = compammo+1
         continue
-    if comp == Action.block and user == Action.reload:
+    if comp == "block" and user == "reload":
         userammo = userammo+1
         continue
