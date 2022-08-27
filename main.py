@@ -1,6 +1,5 @@
 import random
 
-
 #setup userammo and counts
 userammo = 0
 compammo = 0
@@ -159,7 +158,7 @@ while deathcount == 0:
             print("Both of you used shoot")
             deathcount = deathcount+1
             print("The computer got shot\nYou won!")
-        if int(userpotency) < comppotency:
+        elif int(userpotency) < comppotency:
             print("Both of you used shoot")
             print("You lost by getting shot\nThe computer won!")
             deathcount = deathcount+1
@@ -185,3 +184,4 @@ while deathcount == 0:
     if comp == "block" and user == "reload":
         userammo = userammo+1
         continue
+
